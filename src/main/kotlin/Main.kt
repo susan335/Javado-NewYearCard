@@ -1,6 +1,7 @@
 package tech.watanave.newyearcard
 
 import com.itextpdf.io.image.ImageDataFactory
+import com.itextpdf.kernel.font.PdfFontFactory
 import com.itextpdf.kernel.geom.PageSize
 import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfWriter
@@ -37,7 +38,10 @@ fun main(args: Array<String>) {
     val textResourceUrl = ClassLoader.getSystemResource("sample.txt")
     val textFile = File(textResourceUrl.file)
     val text = FileReader(textFile).readText()
-    val paragraph = Paragraph(text).setFontSize(15.0f)
+    // "UniJIS-UCS2-H" を "UniJIS-UCS2-V" にすると縦書きに出来るが、座標系がおかしくなるので注意！
+    val font = PdfFontFactory.createFont("KozMinPro-Regular", "UniJIS-UCS2-H", false)
+
+    val paragraph = Paragraph(text).setFontSize(15.0f).setFont(font)
     canvas.showTextAligned(paragraph, PAGE_WIDTH / 2, PAGE_HEIGHT / 2, TextAlignment.CENTER, VerticalAlignment.MIDDLE)
 
     pdfCanvas.release()
