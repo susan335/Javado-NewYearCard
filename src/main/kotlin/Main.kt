@@ -16,8 +16,8 @@ import java.io.File
 import java.io.FileReader
 
 // ハガキサイズ
-const val PAGE_WIDTH = 266f
-const val PAGE_HEIGHT = 402f
+const val PAGE_WIDTH = 283.465f
+const val PAGE_HEIGHT = 419.529f
 
 fun main(args: Array<String>) {
     val pdfWriter = PdfWriter("/tmp/test.pdf")
